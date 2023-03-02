@@ -1,8 +1,0 @@
-name: recorder
-description: An example recorder contract
-events:
-  priceHistory:
-    price: Uint64
-
-funcs:
-  updatePrice:

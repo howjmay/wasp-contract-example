@@ -1,0 +1,9 @@
+name: swap
+description: An example fake swap contract
+state:
+  latestPrice: Uint64
+funcs:
+  callForPrice:
+    results:
+      price: Uint64
+    
