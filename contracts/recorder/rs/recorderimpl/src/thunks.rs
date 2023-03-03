@@ -28,14 +28,14 @@ pub fn on_dispatch(index: i32) {
 }
 
 pub struct UpdatePriceContext {
-    pub events:  recorderEvents,
+    pub events:  RecorderEvents,
     pub results: MutableUpdatePriceResults,
 }
 
 fn func_update_price_thunk(ctx: &ScFuncContext) {
     ctx.log("recorder.funcUpdatePrice");
     let f = UpdatePriceContext {
-        events:  recorderEvents {},
+        events:  RecorderEvents {},
         results: MutableUpdatePriceResults::new(),
     };
     func_update_price(ctx, &f);

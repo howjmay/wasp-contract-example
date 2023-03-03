@@ -13,13 +13,13 @@ use wasmlib::*;
 use crate::*;
 
 #[derive(Clone)]
-pub struct ImmutableswapState {
+pub struct ImmutableSwapState {
     pub(crate) proxy: Proxy,
 }
 
-impl ImmutableswapState {
-    pub fn new() -> ImmutableswapState {
-        ImmutableswapState {
+impl ImmutableSwapState {
+    pub fn new() -> ImmutableSwapState {
+        ImmutableSwapState {
             proxy: state_proxy(),
         }
     }
@@ -30,18 +30,18 @@ impl ImmutableswapState {
 }
 
 #[derive(Clone)]
-pub struct MutableswapState {
+pub struct MutableSwapState {
     pub(crate) proxy: Proxy,
 }
 
-impl MutableswapState {
-    pub fn new() -> MutableswapState {
-        MutableswapState {
+impl MutableSwapState {
+    pub fn new() -> MutableSwapState {
+        MutableSwapState {
             proxy: state_proxy(),
         }
     }
-    pub fn as_immutable(&self) -> ImmutableswapState {
-        ImmutableswapState { proxy: self.proxy.root("") }
+    pub fn as_immutable(&self) -> ImmutableSwapState {
+        ImmutableSwapState { proxy: self.proxy.root("") }
     }
 
     pub fn latest_price(&self) -> ScMutableUint64 {

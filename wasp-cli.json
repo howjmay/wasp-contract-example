@@ -1,7 +1,7 @@
 {
   "chain": "mychain",
   "chains": {
-    "mychain": "tst1pzwn0ugxa8jdx7wktpq7vs62yj7xm968qx7luhcrhheczs6n5lpfqk52lpn"
+    "mychain": "tst1pzwgklcazrsruulq65akh6jv6jary24s58phtt27pelgd5gxy7kkx8cgy7y"
   },
   "l1": {
     "apiaddress": "http://localhost:14265",
@@ -30,7 +30,7 @@
         "version": 2
       }
     },
-    "timestamp": "2023-01-10T11:05:00.251274+08:00"
+    "timestamp": "2023-03-03T21:06:53.328029+07:00"
   },
   "wallet": {
     "seed": "0x927fc9c0502ca9acc4a2ae15fabb7248d054b319423862873088c92d9b835c15"

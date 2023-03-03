@@ -1,6 +1,7 @@
-cd recorder
+root_path=$(git rev-parse --show-toplevel)
+cd $root_path/contracts/recorder
 schema -rs
 wasm-pack build rs/recorderwasm
-cd ../swap
+cd $root_path/contracts/swap
 schema -rs
-wasm-pack build /rs/swapwasm
+wasm-pack build rs/swapwasm

@@ -1,4 +1,4 @@
-name: swap
+name: Swap
 description: An example fake swap contract
 state:
   latestPrice: Uint64

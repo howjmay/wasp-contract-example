@@ -1,4 +1,4 @@
-name: recorder
+name: Recorder
 description: An example recorder contract
 events:
   priceHistory:

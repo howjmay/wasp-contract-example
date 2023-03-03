@@ -10,10 +10,10 @@
 
 use wasmlib::*;
 
-pub struct recorderEvents {
+pub struct RecorderEvents {
 }
 
-impl recorderEvents {
+impl RecorderEvents {
 
 	pub fn price_history(&self,
         price: u64,

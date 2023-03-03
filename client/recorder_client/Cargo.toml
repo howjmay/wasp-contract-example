@@ -9,5 +9,7 @@ edition = "2021"
 iota-client = { git = "https://github.com/iotaledger/iota.rs", branch = "develop" }
 iota-crypto = { git = "https://github.com/iotaledger/crypto.rs", branch = "dev", default-features = false, features = [ "std", "chacha", "blake2b", "ed25519", "random", "slip10", "bip39", "bip39-en" ] }
 wasmlib = { git = "https://github.com/iotaledger/wasp", branch = "develop" }
-wasmclient = { git = "https://github.com/howjmay/wasp.git", branch = "wasmclient" }
+wasmclient = { git = "https://github.com/iotaledger/wasp.git", branch = "develop" }
 recorder = { path = "../../contracts/recorder/rs/recorder" }
+
+backtrace = "0.3.67"

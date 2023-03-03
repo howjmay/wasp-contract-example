@@ -29,14 +29,14 @@ pub fn on_dispatch(index: i32) {
 
 pub struct CallForPriceContext {
     pub results: MutableCallForPriceResults,
-    pub state:   MutableswapState,
+    pub state:   MutableSwapState,
 }
 
 fn func_call_for_price_thunk(ctx: &ScFuncContext) {
     ctx.log("swap.funcCallForPrice");
     let f = CallForPriceContext {
         results: MutableCallForPriceResults::new(),
-        state:   MutableswapState::new(),
+        state:   MutableSwapState::new(),
     };
     func_call_for_price(ctx, &f);
     ctx.results(&f.results.proxy);
