@@ -11,21 +11,35 @@ use wasmlib::*;
 
 use crate::*;
 
-pub struct CallForPriceCall<'a> {
+pub struct SetPriceCall<'a> {
     pub func:    ScFunc<'a>,
-    pub results: ImmutableCallForPriceResults,
+    pub results: ImmutableSetPriceResults,
+}
+
+pub struct GetPriceCall<'a> {
+    pub func:    ScView<'a>,
+    pub results: ImmutableGetPriceResults,
 }
 
 pub struct ScFuncs {
 }
 
 impl ScFuncs {
-    pub fn call_for_price(ctx: &impl ScFuncCallContext) -> CallForPriceCall {
-        let mut f = CallForPriceCall {
-            func:    ScFunc::new(ctx, HSC_NAME, HFUNC_CALL_FOR_PRICE),
-            results: ImmutableCallForPriceResults { proxy: Proxy::nil() },
+    pub fn set_price(ctx: &impl ScFuncCallContext) -> SetPriceCall {
+        let mut f = SetPriceCall {
+            func:    ScFunc::new(ctx, HSC_NAME, HFUNC_SET_PRICE),
+            results: ImmutableSetPriceResults { proxy: Proxy::nil() },
         };
         ScFunc::link_results(&mut f.results.proxy, &f.func);
+        f
+    }
+
+    pub fn get_price(ctx: &impl ScViewCallContext) -> GetPriceCall {
+        let mut f = GetPriceCall {
+            func:    ScView::new(ctx, HSC_NAME, HVIEW_GET_PRICE),
+            results: ImmutableGetPriceResults { proxy: Proxy::nil() },
+        };
+        ScView::link_results(&mut f.results.proxy, &f.func);
         f
     }
 }

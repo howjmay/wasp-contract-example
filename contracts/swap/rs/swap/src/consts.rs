@@ -17,6 +17,8 @@ pub const RESULT_PRICE : &str = "price";
 
 pub const STATE_LATEST_PRICE : &str = "latestPrice";
 
-pub const FUNC_CALL_FOR_PRICE : &str = "callForPrice";
+pub const FUNC_SET_PRICE : &str = "setPrice";
+pub const VIEW_GET_PRICE : &str = "getPrice";
 
-pub const HFUNC_CALL_FOR_PRICE : ScHname = ScHname(0x34fe8c0a);
+pub const HFUNC_SET_PRICE : ScHname = ScHname(0x4dc65151);
+pub const HVIEW_GET_PRICE : ScHname = ScHname(0xb645c80d);

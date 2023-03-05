@@ -16,6 +16,11 @@ pub struct UpdatePriceCall<'a> {
     pub results: ImmutableUpdatePriceResults,
 }
 
+pub struct GetPriceCall<'a> {
+    pub func:    ScView<'a>,
+    pub results: ImmutableGetPriceResults,
+}
+
 pub struct ScFuncs {
 }
 
@@ -26,6 +31,15 @@ impl ScFuncs {
             results: ImmutableUpdatePriceResults { proxy: Proxy::nil() },
         };
         ScFunc::link_results(&mut f.results.proxy, &f.func);
+        f
+    }
+
+    pub fn get_price(ctx: &impl ScViewCallContext) -> GetPriceCall {
+        let mut f = GetPriceCall {
+            func:    ScView::new(ctx, HSC_NAME, HVIEW_GET_PRICE),
+            results: ImmutableGetPriceResults { proxy: Proxy::nil() },
+        };
+        ScView::link_results(&mut f.results.proxy, &f.func);
         f
     }
 }

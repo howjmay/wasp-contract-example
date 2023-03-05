@@ -8,3 +8,7 @@ funcs:
   updatePrice:
     results:
       success: Bool
+views:
+  getPrice:
+    results:
+      price: Uint64

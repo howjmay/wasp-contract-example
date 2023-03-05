@@ -3,7 +3,10 @@ description: An example fake swap contract
 state:
   latestPrice: Uint64
 funcs:
-  callForPrice:
+  setPrice:
     results:
       price: Uint64
-    
+views:
+  getPrice:
+    results:
+      price: Uint64

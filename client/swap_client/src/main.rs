@@ -7,7 +7,7 @@ const MYSEED: &str = "0xa580555e5b84a4b72bbca829b4085a4725941f3b3702525f36862762
 
 fn main() {
     let ctx = setup_client();
-    let f = swap::ScFuncs::call_for_price(&ctx);
+    let f = swap::ScFuncs::get_price(&ctx);
     f.func.call();
     check_error(&ctx);
 }

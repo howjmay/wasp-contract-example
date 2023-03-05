@@ -39,3 +39,31 @@ impl MutableUpdatePriceResults {
         ScMutableBool::new(self.proxy.root(RESULT_SUCCESS))
     }
 }
+
+#[derive(Clone)]
+pub struct ImmutableGetPriceResults {
+    pub proxy: Proxy,
+}
+
+impl ImmutableGetPriceResults {
+    pub fn price(&self) -> ScImmutableUint64 {
+        ScImmutableUint64::new(self.proxy.root(RESULT_PRICE))
+    }
+}
+
+#[derive(Clone)]
+pub struct MutableGetPriceResults {
+    pub proxy: Proxy,
+}
+
+impl MutableGetPriceResults {
+    pub fn new() -> MutableGetPriceResults {
+        MutableGetPriceResults {
+            proxy: results_proxy(),
+        }
+    }
+
+    pub fn price(&self) -> ScMutableUint64 {
+        ScMutableUint64::new(self.proxy.root(RESULT_PRICE))
+    }
+}

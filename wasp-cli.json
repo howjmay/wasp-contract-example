@@ -1,7 +1,7 @@
 {
   "chain": "mychain",
   "chains": {
-    "mychain": "tst1pzwgklcazrsruulq65akh6jv6jary24s58phtt27pelgd5gxy7kkx8cgy7y"
+    "mychain": "tst1pprxp0dfj48qglfqx5qvkxkr00u5gt6cua7lq02eywr37e8caeez2wyq8cs"
   },
   "l1": {
     "apiaddress": "http://localhost:14265",

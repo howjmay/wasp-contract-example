@@ -13,24 +13,52 @@ use wasmlib::*;
 use crate::*;
 
 #[derive(Clone)]
-pub struct ImmutableCallForPriceResults {
+pub struct ImmutableSetPriceResults {
     pub proxy: Proxy,
 }
 
-impl ImmutableCallForPriceResults {
+impl ImmutableSetPriceResults {
     pub fn price(&self) -> ScImmutableUint64 {
         ScImmutableUint64::new(self.proxy.root(RESULT_PRICE))
     }
 }
 
 #[derive(Clone)]
-pub struct MutableCallForPriceResults {
+pub struct MutableSetPriceResults {
     pub proxy: Proxy,
 }
 
-impl MutableCallForPriceResults {
-    pub fn new() -> MutableCallForPriceResults {
-        MutableCallForPriceResults {
+impl MutableSetPriceResults {
+    pub fn new() -> MutableSetPriceResults {
+        MutableSetPriceResults {
+            proxy: results_proxy(),
+        }
+    }
+
+    pub fn price(&self) -> ScMutableUint64 {
+        ScMutableUint64::new(self.proxy.root(RESULT_PRICE))
+    }
+}
+
+#[derive(Clone)]
+pub struct ImmutableGetPriceResults {
+    pub proxy: Proxy,
+}
+
+impl ImmutableGetPriceResults {
+    pub fn price(&self) -> ScImmutableUint64 {
+        ScImmutableUint64::new(self.proxy.root(RESULT_PRICE))
+    }
+}
+
+#[derive(Clone)]
+pub struct MutableGetPriceResults {
+    pub proxy: Proxy,
+}
+
+impl MutableGetPriceResults {
+    pub fn new() -> MutableGetPriceResults {
+        MutableGetPriceResults {
             proxy: results_proxy(),
         }
     }

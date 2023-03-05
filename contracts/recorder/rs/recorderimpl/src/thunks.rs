@@ -15,11 +15,13 @@ use crate::*;
 const EXPORT_MAP: ScExportMap = ScExportMap {
     names: &[
         FUNC_UPDATE_PRICE,
+        VIEW_GET_PRICE,
     ],
     funcs: &[
         func_update_price_thunk,
     ],
     views: &[
+        view_get_price_thunk,
     ],
 };
 
@@ -41,4 +43,18 @@ fn func_update_price_thunk(ctx: &ScFuncContext) {
     func_update_price(ctx, &f);
     ctx.results(&f.results.proxy);
     ctx.log("recorder.funcUpdatePrice ok");
+}
+
+pub struct GetPriceContext {
+    pub results: MutableGetPriceResults,
+}
+
+fn view_get_price_thunk(ctx: &ScViewContext) {
+    ctx.log("recorder.viewGetPrice");
+    let f = GetPriceContext {
+        results: MutableGetPriceResults::new(),
+    };
+    view_get_price(ctx, &f);
+    ctx.results(&f.results.proxy);
+    ctx.log("recorder.viewGetPrice ok");
 }

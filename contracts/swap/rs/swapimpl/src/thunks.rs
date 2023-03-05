@@ -14,12 +14,14 @@ use crate::*;
 
 const EXPORT_MAP: ScExportMap = ScExportMap {
     names: &[
-        FUNC_CALL_FOR_PRICE,
+        FUNC_SET_PRICE,
+        VIEW_GET_PRICE,
     ],
     funcs: &[
-        func_call_for_price_thunk,
+        func_set_price_thunk,
     ],
     views: &[
+        view_get_price_thunk,
     ],
 };
 
@@ -27,18 +29,34 @@ pub fn on_dispatch(index: i32) {
     EXPORT_MAP.dispatch(index);
 }
 
-pub struct CallForPriceContext {
-    pub results: MutableCallForPriceResults,
+pub struct SetPriceContext {
+    pub results: MutableSetPriceResults,
     pub state:   MutableSwapState,
 }
 
-fn func_call_for_price_thunk(ctx: &ScFuncContext) {
-    ctx.log("swap.funcCallForPrice");
-    let f = CallForPriceContext {
-        results: MutableCallForPriceResults::new(),
+fn func_set_price_thunk(ctx: &ScFuncContext) {
+    ctx.log("swap.funcSetPrice");
+    let f = SetPriceContext {
+        results: MutableSetPriceResults::new(),
         state:   MutableSwapState::new(),
     };
-    func_call_for_price(ctx, &f);
+    func_set_price(ctx, &f);
     ctx.results(&f.results.proxy);
-    ctx.log("swap.funcCallForPrice ok");
+    ctx.log("swap.funcSetPrice ok");
+}
+
+pub struct GetPriceContext {
+    pub results: MutableGetPriceResults,
+    pub state:   ImmutableSwapState,
+}
+
+fn view_get_price_thunk(ctx: &ScViewContext) {
+    ctx.log("swap.viewGetPrice");
+    let f = GetPriceContext {
+        results: MutableGetPriceResults::new(),
+        state:   ImmutableSwapState::new(),
+    };
+    view_get_price(ctx, &f);
+    ctx.results(&f.results.proxy);
+    ctx.log("swap.viewGetPrice ok");
 }
