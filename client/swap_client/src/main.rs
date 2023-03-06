@@ -16,7 +16,7 @@ fn main() {
 
 fn setup_client() -> WasmClientContext {
     let svc = Arc::new(WasmClientService::new("http://localhost:9090", MYCHAIN));
-    let mut ctx = WasmClientContext::new(svc.clone(), "swap");
+    let mut ctx = WasmClientContext::new(svc.clone(), swap::SC_NAME);
     ctx.sign_requests(&keypair::KeyPair::from_sub_seed(
         &wasmlib::bytes_from_string(MYSEED),
         0,

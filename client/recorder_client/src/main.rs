@@ -2,19 +2,21 @@ use std::sync::Arc;
 use wasmclient::isc::keypair;
 use wasmclient::{WasmClientContext, WasmClientService};
 
-const MYCHAIN: &str = "tst1pzwgklcazrsruulq65akh6jv6jary24s58phtt27pelgd5gxy7kkx8cgy7y";
+// These should be the same as the configurations in wasp-cli.json
+const MYCHAIN: &str = "tst1pprxp0dfj48qglfqx5qvkxkr00u5gt6cua7lq02eywr37e8caeez2wyq8cs";
 const MYSEED: &str = "0xa580555e5b84a4b72bbca829b4085a4725941f3b3702525f36862762d76c21f3";
 
 fn main() {
     let ctx = setup_client();
-    let f = recorder::ScFuncs::update_price(&ctx);
+    let f = recorder::ScFuncs::get_price(&ctx);
     f.func.call();
     check_error(&ctx);
+    println!("price: {}", f.results.price().value());
 }
 
 fn setup_client() -> WasmClientContext {
     let svc = Arc::new(WasmClientService::new("http://localhost:9090", MYCHAIN));
-    let mut ctx = WasmClientContext::new(svc.clone(), "recorder");
+    let mut ctx = WasmClientContext::new(svc.clone(), recorder::SC_NAME);
     ctx.sign_requests(&keypair::KeyPair::from_sub_seed(
         &wasmlib::bytes_from_string(MYSEED),
         0,
@@ -26,8 +28,6 @@ fn setup_client() -> WasmClientContext {
 fn check_error(ctx: &WasmClientContext) {
     if let Err(e) = ctx.err() {
         println!("err: {}", e);
-        let bt = backtrace::Backtrace::new();
-        println!("{:?}", bt);
         assert!(false);
     }
 }
