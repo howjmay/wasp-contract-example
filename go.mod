@@ -2,7 +2,10 @@ module github.com/howjmay/wasp-contract-example
 
 go 1.20
 
-require github.com/iotaledger/wasp v0.5.0-alpha.12.0.20230303114734-cd9363861de7
+require (
+	github.com/iotaledger/wasp v0.5.0-alpha.12.0.20230303114734-cd9363861de7
+	github.com/spf13/viper v1.15.0
+)
 
 require (
 	filippo.io/edwards25519 v1.0.0 // indirect
@@ -88,7 +91,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.15.0 // indirect
 	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
