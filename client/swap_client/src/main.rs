@@ -2,7 +2,7 @@ use std::sync::Arc;
 use wasmclient::isc::keypair;
 use wasmclient::{WasmClientContext, WasmClientService};
 
-const MYCHAIN: &str = "tst1pzwgklcazrsruulq65akh6jv6jary24s58phtt27pelgd5gxy7kkx8cgy7y";
+const MYCHAIN: &str = "tst1pprxp0dfj48qglfqx5qvkxkr00u5gt6cua7lq02eywr37e8caeez2wyq8cs";
 const MYSEED: &str = "0xa580555e5b84a4b72bbca829b4085a4725941f3b3702525f36862762d76c21f3";
 
 fn main() {
@@ -10,6 +10,7 @@ fn main() {
     let f = swap::ScFuncs::get_price(&ctx);
     f.func.call();
     check_error(&ctx);
+    println!("price: {}", f.results.price().value());
 }
 
 fn setup_client() -> WasmClientContext {
