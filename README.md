@@ -13,3 +13,12 @@ Initialize your Go implementation with `github.com/{user_name}/{repo_name}` styl
 
 Use `go get github.com/iotaledger/wasp@{commit_hash}` to importing the latest commit on develop branch.
 
+### Rust
+
+Simply use github as remote package 
+
+```
+wasmlib = { git = "https://github.com/iotaledger/wasp", branch = "develop" }
+wasmclient = { git = "https://github.com/iotaledger/wasp.git", branch = "develop" }
+```
+
