@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/iotaledger/wasp v0.5.0-alpha.12.0.20230303114734-cd9363861de7
 	github.com/spf13/viper v1.15.0
+	github.com/stretchr/testify v1.8.2
 )
 
 require (
@@ -23,6 +24,7 @@ require (
 	github.com/deckarep/golang-set/v2 v2.1.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
 	github.com/eclipse/paho.mqtt.golang v1.4.2 // indirect
+	github.com/edsrzf/mmap-go v1.1.0 // indirect
 	github.com/ethereum/go-ethereum v1.11.2 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/getsentry/sentry-go v0.18.0 // indirect
@@ -38,7 +40,9 @@ require (
 	github.com/holiman/big v0.0.0-20221017200358-a027dc42d04e // indirect
 	github.com/holiman/bloomfilter/v2 v2.0.3 // indirect
 	github.com/holiman/uint256 v1.2.1 // indirect
+	github.com/huin/goupnp v1.1.0 // indirect
 	github.com/iancoleman/orderedmap v0.2.0 // indirect
+	github.com/iotaledger/grocksdb v1.7.5-0.20230220105546-5162e18885c7 // indirect
 	github.com/iotaledger/hive.go/constraints v0.0.0-20230301135914-603c4dac79e1 // indirect
 	github.com/iotaledger/hive.go/crypto v0.0.0-20230301135914-603c4dac79e1 // indirect
 	github.com/iotaledger/hive.go/ds v0.0.0-20230301135914-603c4dac79e1 // indirect
@@ -52,6 +56,7 @@ require (
 	github.com/iotaledger/hive.go/web v0.0.0-20230301135914-603c4dac79e1 // indirect
 	github.com/iotaledger/iota.go v1.0.0 // indirect
 	github.com/iotaledger/iota.go/v3 v3.0.0-rc.1.0.20230223105330-ef33ea7fe34f // indirect
+	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.16.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
@@ -91,7 +96,6 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/testify v1.8.2 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/tklauser/go-sysconf v0.3.11 // indirect
