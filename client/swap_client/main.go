@@ -14,6 +14,7 @@ import (
 )
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	viper.SetConfigName("wasp-cli.json")
 	viper.SetConfigType("json")
 	viper.AddConfigPath("../..")
@@ -29,22 +30,30 @@ func main() {
 	}
 
 	ctx := setupClient(seed, chainID)
-	f := swap.ScFuncs.GetPrice(ctx)
-	f.Func.Call()
+	fGetPrice := swap.ScFuncs.GetPrice(ctx)
+	fGetPrice.Func.Call()
 	if ctx.Err != nil {
 		log.Fatal(ctx.Err)
 	}
-	fmt.Println("price:", f.Results.Price().Value())
+	fmt.Println("price:", fGetPrice.Results.Price().Value())
+
+	fSetPrice := swap.ScFuncs.SetPrice(ctx)
+	fSetPrice.Func.Post()
+	if ctx.Err != nil {
+		log.Fatal(ctx.Err)
+	}
+	fmt.Println("price:", fSetPrice.Results.Price().Value())
 }
 
-func setupClient(seed, chainID string) *wasmclient.WasmClientContext {
+func setupClient(seedStr, chainID string) *wasmclient.WasmClientContext {
 	var params *parameters.L1Params
 	err := viper.UnmarshalKey("l1.params", &params)
 	if err != nil {
 		log.Fatal(err)
 	}
 	parameters.InitL1(params)
-	wallet := cryptolib.NewKeyPairFromSeed(cryptolib.NewSeedFromBytes(wasmtypes.BytesFromString(seed)))
+	seed := cryptolib.NewSeedFromBytes(wasmtypes.BytesFromString(seedStr))
+	wallet := cryptolib.NewKeyPairFromSeed(seed.SubSeed(0))
 	svc := wasmclient.NewWasmClientService("http://localhost:9090", chainID)
 	ctx := wasmclient.NewWasmClientContext(svc, swap.ScName)
 	ctx.SignRequests(wallet)

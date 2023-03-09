@@ -10,7 +10,6 @@ package swapimpl
 
 import (
 	"github.com/howjmay/wasp-contract-example/contracts/swap/go/swap"
-
 	"github.com/iotaledger/wasp/packages/wasmvm/wasmlib/go/wasmlib"
 )
 

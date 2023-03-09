@@ -3,7 +3,7 @@ use wasmclient::isc::keypair;
 use wasmclient::{WasmClientContext, WasmClientService};
 
 // These should be the same as the configurations in wasp-cli.json
-const MYCHAIN: &str = "tst1pprxp0dfj48qglfqx5qvkxkr00u5gt6cua7lq02eywr37e8caeez2wyq8cs";
+const MYCHAIN: &str = "tst1pqw7k03vt0sm5qnalcns08x9zzftfgx4zm0lptsrnt3tnnc9lc3e5tp6mam";
 const MYSEED: &str = "0xa580555e5b84a4b72bbca829b4085a4725941f3b3702525f36862762d76c21f3";
 
 fn main() {
@@ -12,6 +12,10 @@ fn main() {
     f.func.call();
     check_error(&ctx);
     println!("price: {}", f.results.price().value());
+    let f_set_price = swap::ScFuncs::set_price(&ctx);
+    f_set_price.func.call();
+    check_error(&ctx);
+    println!("set price: {}", f_set_price.results.price().value());
 }
 
 fn setup_client() -> WasmClientContext {

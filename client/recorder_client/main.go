@@ -37,14 +37,15 @@ func main() {
 	fmt.Println("price:", f.Results.Price().Value())
 }
 
-func setupClient(seed, chainID string) *wasmclient.WasmClientContext {
+func setupClient(seedStr, chainID string) *wasmclient.WasmClientContext {
 	var params *parameters.L1Params
 	err := viper.UnmarshalKey("l1.params", &params)
 	if err != nil {
 		log.Fatal(err)
 	}
 	parameters.InitL1(params)
-	wallet := cryptolib.NewKeyPairFromSeed(cryptolib.NewSeedFromBytes(wasmtypes.BytesFromString(seed)))
+	seed := cryptolib.NewSeedFromBytes(wasmtypes.BytesFromString(seedStr))
+	wallet := cryptolib.NewKeyPairFromSeed(seed.SubSeed(0))
 	svc := wasmclient.NewWasmClientService("http://localhost:9090", chainID)
 	ctx := wasmclient.NewWasmClientContext(svc, recorder.ScName)
 	ctx.SignRequests(wallet)

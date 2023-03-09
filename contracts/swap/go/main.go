@@ -11,15 +11,11 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/howjmay/wasp-contract-example/contracts/swap/go/swapimpl"
-
 	"github.com/iotaledger/wasp/packages/wasmvm/wasmvmhost/go/wasmvmhost"
 )
 
 func main() {
-	fmt.Println("1")
 }
 
 func init() {
