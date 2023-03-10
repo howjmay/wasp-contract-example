@@ -9,7 +9,9 @@ pub fn func_set_price(ctx: &ScFuncContext, f: &SetPriceContext) {
     let get_block_info_f = wasmlib::coreblocklog::ScFuncs::get_block_info(ctx);
     get_block_info_f.func.call();
     let block_index = get_block_info_f.results.block_index().value();
-    f.results.price().set_value((block_index * 10) as u64);
+    let price = (block_index * 10) as u64;
+    f.events.price_log(block_index as u64, price);
+    f.results.price().set_value(price);
 }
 
 pub fn view_get_price(ctx: &ScViewContext, f: &GetPriceContext) {

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/howjmay/wasp-contract-example/contracts/swap/go/swap"
 	"github.com/spf13/viper"
@@ -30,19 +31,33 @@ func main() {
 	}
 
 	ctx := setupClient(seed, chainID)
+
+	events := &swap.SwapEventHandlers{}
+	events.OnSwapPriceLog(func(e *swap.EventPriceLog) {
+		fmt.Println("receiving event: ", e)
+	})
+	ctx.Register(events)
+	if ctx.Err != nil {
+		log.Fatal(ctx.Err)
+	}
+
 	fGetPrice := swap.ScFuncs.GetPrice(ctx)
 	fGetPrice.Func.Call()
 	if ctx.Err != nil {
 		log.Fatal(ctx.Err)
 	}
-	fmt.Println("price:", fGetPrice.Results.Price().Value())
+	fmt.Println("GetPrice result:", fGetPrice.Results.Price().Value())
 
 	fSetPrice := swap.ScFuncs.SetPrice(ctx)
 	fSetPrice.Func.Post()
 	if ctx.Err != nil {
 		log.Fatal(ctx.Err)
 	}
-	fmt.Println("price:", fSetPrice.Results.Price().Value())
+	// client side cant get result from a `func` function
+	fmt.Println("SetPrice result:", fSetPrice.Results.Price().Value())
+
+	fmt.Println("wait for event...")
+	time.Sleep(1000 * time.Millisecond)
 }
 
 func setupClient(seedStr, chainID string) *wasmclient.WasmClientContext {

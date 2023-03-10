@@ -31,6 +31,7 @@ func OnDispatch(index int32) {
 }
 
 type SetPriceContext struct {
+	Events  swap.SwapEvents
 	Results swap.MutableSetPriceResults
 	State   swap.MutableSwapState
 }

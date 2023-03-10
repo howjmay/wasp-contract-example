@@ -30,6 +30,7 @@ pub fn on_dispatch(index: i32) {
 }
 
 pub struct SetPriceContext {
+    pub events:  SwapEvents,
     pub results: MutableSetPriceResults,
     pub state:   MutableSwapState,
 }
@@ -37,6 +38,7 @@ pub struct SetPriceContext {
 fn func_set_price_thunk(ctx: &ScFuncContext) {
     ctx.log("swap.funcSetPrice");
     let f = SetPriceContext {
+        events:  SwapEvents {},
         results: MutableSetPriceResults::new(),
         state:   MutableSwapState::new(),
     };

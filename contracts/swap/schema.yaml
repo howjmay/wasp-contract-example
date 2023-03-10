@@ -2,6 +2,10 @@ name: Swap
 description: An example fake swap contract
 state:
   latestPrice: Uint64
+events:
+  priceLog:
+    blockNum: Uint64
+    price: Uint64
 funcs:
   setPrice:
     results:

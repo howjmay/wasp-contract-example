@@ -9,10 +9,14 @@
 
 pub use consts::*;
 pub use contract::*;
+pub use events::*;
+pub use eventhandlers::*;
 pub use results::*;
 pub use state::*;
 
 pub mod consts;
 pub mod contract;
+pub mod events;
+pub mod eventhandlers;
 pub mod results;
 pub mod state;
