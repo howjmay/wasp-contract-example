@@ -56,7 +56,7 @@ func main() {
 	// client side cant get result from a `func` function
 	fmt.Println("SetPrice result:", fSetPrice.Results.Price().Value())
 
-	fmt.Println("wait for event...")
+	fmt.Println("waiting for event...")
 	time.Sleep(1000 * time.Millisecond)
 }
 
