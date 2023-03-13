@@ -1,12 +1,11 @@
+use serde_json::Value;
 use std::sync::Arc;
 use wasmclient::isc::keypair;
 use wasmclient::{WasmClientContext, WasmClientService};
-// These should be the same as the configurations in wasp-cli.json
-const MYCHAIN: &str = "tst1pq3z7j5kvjmc8xff9mrywpwv6tf5z8p8juvwsp85sqc9af5h2emdcn9c6p9";
-const MYSEED: &str = "0xa580555e5b84a4b72bbca829b4085a4725941f3b3702525f36862762d76c21f3";
 
 fn main() {
-    let mut ctx = setup_client();
+    let cfg = read_config("../../wasp-cli.json");
+    let mut ctx = setup_client(&cfg);
 
     let mut events = swap::eventhandlers::SwapEventHandlers::new("0");
     events.on_swap_price_log(|e: &swap::EventPriceLog| println!("receiving event: {:?}", e.price));
@@ -27,15 +26,45 @@ fn main() {
     std::thread::sleep(std::time::Duration::from_secs(1));
 }
 
-fn setup_client() -> WasmClientContext {
-    let svc = Arc::new(WasmClientService::new("http://localhost:9090", MYCHAIN));
+fn setup_client(cfg: &Config) -> WasmClientContext {
+    let svc = Arc::new(WasmClientService::new(
+        "http://localhost:9090",
+        &cfg.chain_id,
+    ));
     let mut ctx = WasmClientContext::new(svc.clone(), swap::SC_NAME);
     ctx.sign_requests(&keypair::KeyPair::from_sub_seed(
-        &wasmlib::bytes_from_string(MYSEED),
+        &wasmlib::bytes_from_string(&cfg.seed),
         0,
     ));
     check_error(&ctx);
     return ctx;
+}
+
+struct Config {
+    chain_id: String,
+    seed: String,
+}
+
+fn read_config(path: &str) -> Config {
+    let content = match std::fs::read_to_string(path) {
+        Ok(v) => v,
+        Err(e) => {
+            panic!("err: {}", e);
+        }
+    };
+    let v: Value = match serde_json::from_str(&content) {
+        Ok(v) => v,
+        Err(e) => {
+            panic!("err: {}", e);
+        }
+    };
+    let mut ret = Config {
+        chain_id: v["chains"]["mychain"].to_string(),
+        seed: v["wallet"]["seed"].to_string(),
+    };
+    ret.chain_id = ret.chain_id[1..ret.chain_id.len() - 1].to_string();
+    ret.seed = ret.seed[1..ret.seed.len() - 1].to_string();
+    return ret;
 }
 
 #[track_caller]
