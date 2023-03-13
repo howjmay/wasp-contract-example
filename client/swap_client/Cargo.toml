@@ -7,9 +7,9 @@ edition = "2021"
 
 [dependencies]
 iota-client = { git = "https://github.com/iotaledger/iota.rs", branch = "develop" }
-iota-crypto = { git = "https://github.com/iotaledger/crypto.rs", branch = "dev", default-features = false, features = [ "std", "chacha", "blake2b", "ed25519", "random", "slip10", "bip39", "bip39-en" ] }
+iota-crypto = { git = "https://github.com/iotaledger/crypto.rs", branch = "dev", default-features = false, features = [ "blake2b", "ed25519" ] }
 wasmlib = { git = "https://github.com/iotaledger/wasp", branch = "develop" }
-wasmclient = { git = "https://github.com/iotaledger/wasp.git", branch = "develop" }
+wasmclient = { git = "https://github.com/iotaledger/wasp", branch = "develop" }
 swap = { path = "../../contracts/swap/rs/swap" }
 serde_json = "1.0.94"
 serde = { version = "1.0.155", features = ["derive"] }
