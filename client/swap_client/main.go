@@ -67,9 +67,9 @@ func setupClient(seedStr, chainID string) *wasmclient.WasmClientContext {
 		log.Fatal(err)
 	}
 	parameters.InitL1(params)
-	seed := cryptolib.NewSeedFromBytes(wasmtypes.BytesFromString(seedStr))
-	wallet := cryptolib.NewKeyPairFromSeed(seed.SubSeed(0))
-	svc := wasmclient.NewWasmClientService("http://localhost:9090", chainID)
+	seed := cryptolib.SeedFromBytes(wasmtypes.BytesFromString(seedStr))
+	wallet := cryptolib.KeyPairFromSeed(seed.SubSeed(0))
+	svc := wasmclient.NewWasmClientService("http://localhost:9090")
 	ctx := wasmclient.NewWasmClientContext(svc, swap.ScName)
 	ctx.SignRequests(wallet)
 	return ctx
