@@ -5,9 +5,9 @@ use wasmclient::{WasmClientContext, WasmClientService};
 
 fn main() {
     let cfg = read_config("../../wasp-cli.json");
-    let mut ctx = setup_client(&cfg);
+    let ctx = setup_client(&cfg);
 
-    let mut events = swap::eventhandlers::SwapEventHandlers::new("0");
+    let mut events = swap::eventhandlers::SwapEventHandlers::new();
     events.on_swap_price_log(|e: &swap::EventPriceLog| println!("receiving event: {:?}", e.price));
     let h = Box::new(events);
     ctx.register(h);
@@ -27,10 +27,7 @@ fn main() {
 }
 
 fn setup_client(cfg: &Config) -> WasmClientContext {
-    let svc = Arc::new(WasmClientService::new(
-        "http://localhost:9090",
-        &cfg.chain_id,
-    ));
+    let svc = Arc::new(WasmClientService::new("http://localhost:9090"));
     let mut ctx = WasmClientContext::new(svc.clone(), swap::SC_NAME);
     ctx.sign_requests(&keypair::KeyPair::from_sub_seed(
         &wasmlib::bytes_from_string(&cfg.seed),
